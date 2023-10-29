@@ -11,6 +11,8 @@ import { config } from "../package.json"
 
 describe("Semaphore tests", () => {
 
+    const merkleTreeDepth = 20
+
     const wasmFilePath = `${config.paths.build["snark-artifacts"]}/semaphore.wasm`
     const zkeyFilePath = `${config.paths.build["snark-artifacts"]}/semaphore.zkey`
 
@@ -18,7 +20,7 @@ describe("Semaphore tests", () => {
 
     before(async () => {
         const snarkArtifactsPath = config.paths.build["snark-artifacts"]
-        const url = `http://www.trusted-setup-pse.org/semaphore/${20}`
+        const url = `http://www.trusted-setup-pse.org/semaphore/${merkleTreeDepth}`
 
         if (!fs.existsSync(snarkArtifactsPath)) {
             fs.mkdirSync(snarkArtifactsPath, { recursive: true })
@@ -35,7 +37,6 @@ describe("Semaphore tests", () => {
 
     it("Testing off-chain signaling", async () => {
         const groupId = 1
-        const merkleTreeDepth = 20
         const externalNullifier = 1212
         const signal = 1
 
